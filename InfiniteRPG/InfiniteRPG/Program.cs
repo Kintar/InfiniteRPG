@@ -10,7 +10,7 @@ namespace InfiniteRPG
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (InfiniteRPG game = new InfiniteRPG())
             {
                 game.Run();
             }
