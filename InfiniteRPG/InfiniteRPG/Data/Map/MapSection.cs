@@ -17,9 +17,17 @@ namespace InfiniteRPG.Data.Map
 
     }
 
-    public enum MapLayer
+    public enum TileLayer
     {
         Background,
+        Foreground,
+        Overlay
+    }
+
+    public class Tile
+    {
+        readonly int[] content = new int[Enum.GetValues(typeof(TileLayer)).Length];
+
 
     }
 }

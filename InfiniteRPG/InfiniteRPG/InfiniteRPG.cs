@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InfiniteRPG.Components;
+using InfiniteRPG.Data;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -18,10 +20,16 @@ namespace InfiniteRPG
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Camera2D camera;
+        CameraMovementState movementState;
+        Texture2D myTexture;
+        SpriteFont diagFont;
 
         public InfiniteRPG()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 768;
             Content.RootDirectory = "Content";
         }
 
@@ -33,7 +41,13 @@ namespace InfiniteRPG
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            movementState = new CameraMovementState();
+            camera = new Camera2D(this, movementState);
+            camera.Viewport = graphics.GraphicsDevice.Viewport;
+
+            graphics.DeviceReset += (sender, args) => camera.Viewport = graphics.GraphicsDevice.Viewport;
+
+            Components.Add(camera);
 
             base.Initialize();
         }
@@ -47,16 +61,8 @@ namespace InfiniteRPG
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
+            myTexture = Content.Load<Texture2D>("Tilesets/Sample1");
+            diagFont = Content.Load<SpriteFont>("Fonts/DiagFont");
         }
 
         /// <summary>
@@ -70,7 +76,28 @@ namespace InfiniteRPG
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            var keyState = Keyboard.GetState();
+
+            if (keyState.IsKeyDown(Keys.Escape))
+                this.Exit();
+
+            movementState.Reset();
+
+            // Directional movement
+            if (keyState.IsKeyDown(Keys.NumPad4))
+                movementState.SetMoving(CameraMovement.Left);
+            if (keyState.IsKeyDown(Keys.NumPad6))
+                movementState.SetMoving(CameraMovement.Right);
+            if (keyState.IsKeyDown(Keys.NumPad8))
+                movementState.SetMoving(CameraMovement.Up);
+            if (keyState.IsKeyDown(Keys.NumPad2))
+                movementState.SetMoving(CameraMovement.Down);
+
+            // Zoom
+            if (keyState.IsKeyDown(Keys.Add))
+                movementState.SetMoving(CameraMovement.ZoomIn);
+            if (keyState.IsKeyDown(Keys.Subtract))
+                movementState.SetMoving(CameraMovement.ZoomOut);
 
             base.Update(gameTime);
         }
@@ -83,8 +110,18 @@ namespace InfiniteRPG
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            var transform = camera.GetTransformMatrix();
 
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, transform);
+            spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
+            spriteBatch.End();
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            spriteBatch.DrawString(diagFont, string.Format("x: {0}\ny: {1}\nz: {2}", camera.X, camera.Y, camera.Zoom),
+                Vector2.Zero, Color.DarkGreen);
+            spriteBatch.End();
+
+            
             base.Draw(gameTime);
         }
     }
