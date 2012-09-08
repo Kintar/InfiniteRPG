@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InfiniteRPG.Components;
 using InfiniteRPG.Data;
+using InfiniteRPG.Data.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -25,6 +26,7 @@ namespace InfiniteRPG
         Texture2D myTexture;
         SpriteFont diagFont;
         private Tileset tileset;
+        private MapSection mapSection;
 
         public InfiniteRPG()
         {
@@ -66,6 +68,7 @@ namespace InfiniteRPG
             diagFont = Content.Load<SpriteFont>("Fonts/DiagFont");
 
             tileset = new Tileset("Sample1", myTexture, 32, 32);
+            mapSection = MapSection.FromTMXFile("sample.tmx", new Vector2(0, 0), tileset);
         }
 
         /// <summary>
@@ -117,14 +120,7 @@ namespace InfiniteRPG
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransform);
 
-            for (var x = 0; x < 16; x++)
-            {
-                for (var y = 0; y < 16; y++)
-                {
-                    var pos = new Vector2(x * 32, y * 32);
-                    tileset.DrawTile(pos, x, spriteBatch);
-                }
-            }
+            mapSection.Draw(spriteBatch);
 
             spriteBatch.End();
 

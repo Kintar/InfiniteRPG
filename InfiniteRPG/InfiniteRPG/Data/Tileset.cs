@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace InfiniteRPG.Data
 {
-    internal class Tileset
+    public class Tileset
     {
         public string Name { get; protected set; }
         public int TileWidth { get; protected set; }
@@ -46,9 +46,9 @@ namespace InfiniteRPG.Data
             Contract.Requires(tileNumber <= TileCount);
 
             var myColor = color.HasValue ? color.Value : Color.White;
-
-            var ypos = (tileNumber / tilesHigh) * TileHeight;
-            var xpos = (tileNumber % tilesWide) * TileWidth;
+            
+            var ypos = (tileNumber / tilesWide) * TileHeight;
+            var xpos = ((tileNumber - 1) % tilesWide) * TileWidth;
 
             batch.Draw(Texture, position, new Rectangle(xpos, ypos, TileWidth, TileHeight), myColor);
         }
