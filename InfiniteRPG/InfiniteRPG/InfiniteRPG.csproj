@@ -120,9 +120,11 @@
     <Compile Include="Data\CameraMovement.cs" />
     <Compile Include="Data\CameraMovementState.cs" />
     <Compile Include="Data\Map\MapSection.cs" />
+    <Compile Include="Data\Tileset.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="InfiniteRPG.cs" />
+    <Compile Include="Util\MathUtils.cs" />
     <Compile Include="Util\Noise.cs" />
   </ItemGroup>
   <ItemGroup>

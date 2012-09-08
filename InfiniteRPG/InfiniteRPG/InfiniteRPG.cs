@@ -24,6 +24,7 @@ namespace InfiniteRPG
         CameraMovementState movementState;
         Texture2D myTexture;
         SpriteFont diagFont;
+        private Tileset tileset;
 
         public InfiniteRPG()
         {
@@ -63,6 +64,8 @@ namespace InfiniteRPG
 
             myTexture = Content.Load<Texture2D>("Tilesets/Sample1");
             diagFont = Content.Load<SpriteFont>("Fonts/DiagFont");
+
+            tileset = new Tileset("Sample1", myTexture, 32, 32);
         }
 
         /// <summary>
@@ -110,13 +113,22 @@ namespace InfiniteRPG
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            var transform = camera.GetTransformMatrix();
+            var cameraTransform = camera.GetTransformMatrix();
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, transform);
-            spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransform);
+
+            for (var x = 0; x < 16; x++)
+            {
+                for (var y = 0; y < 16; y++)
+                {
+                    var pos = new Vector2(x * 32, y * 32);
+                    tileset.DrawTile(pos, x, spriteBatch);
+                }
+            }
+
             spriteBatch.End();
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             spriteBatch.DrawString(diagFont, string.Format("x: {0}\ny: {1}\nz: {2}", camera.X, camera.Y, camera.Zoom),
                 Vector2.Zero, Color.DarkGreen);
             spriteBatch.End();
