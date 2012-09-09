@@ -94,6 +94,7 @@
   <ItemGroup>
     <Compile Include="CameraMovement.cs" />
     <Compile Include="CameraMovementState.cs" />
+    <Compile Include="Map\MapCell.cs" />
     <Compile Include="Map\MapSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Map\Tileset.cs" />

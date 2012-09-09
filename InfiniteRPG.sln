@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteRPG.Data", "Infinit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteRPG.Util", "InfiniteRPG.Util\InfiniteRPG.Util.csproj", "{7E9F7264-E569-4B05-B274-B972D33B1C7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteRPG.ContentPipeline", "InfiniteRPG.ContentPipeline\InfiniteRPG.ContentPipeline.csproj", "{0831FA9F-17B6-49EE-A175-DA8E61A4494F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -36,6 +38,10 @@ Global
 		{7E9F7264-E569-4B05-B274-B972D33B1C7D}.Debug|x86.Build.0 = Debug|x86
 		{7E9F7264-E569-4B05-B274-B972D33B1C7D}.Release|x86.ActiveCfg = Release|x86
 		{7E9F7264-E569-4B05-B274-B972D33B1C7D}.Release|x86.Build.0 = Release|x86
+		{0831FA9F-17B6-49EE-A175-DA8E61A4494F}.Debug|x86.ActiveCfg = Debug|x86
+		{0831FA9F-17B6-49EE-A175-DA8E61A4494F}.Debug|x86.Build.0 = Debug|x86
+		{0831FA9F-17B6-49EE-A175-DA8E61A4494F}.Release|x86.ActiveCfg = Debug|x86
+		{0831FA9F-17B6-49EE-A175-DA8E61A4494F}.Release|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

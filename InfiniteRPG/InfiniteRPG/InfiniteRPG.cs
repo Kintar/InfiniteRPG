@@ -69,8 +69,12 @@ namespace InfiniteRPG
 
             tileset = new Tileset("Sample1", myTexture, 32, 32);
             mapSections = new MapSection[2];
-            mapSections[0] = MapSection.FromTMXFile("sample.tmx", new Vector2(0, 0), tileset);
-            mapSections[1] = MapSection.FromTMXFile("sample.tmx", new Vector2(0, 25 * 32), tileset);
+            mapSections[0] = Content.Load<MapSection>("Maps/layers-example");
+            mapSections[0].Tileset = tileset;
+            mapSections[0].WorldLocation = Vector2.Zero;
+            mapSections[1] = Content.Load<MapSection>("Maps/layers-example");
+            mapSections[1].WorldLocation = new Vector2(0, 25 * 32);
+            mapSections[1].Tileset = tileset;
         }
 
         /// <summary>
@@ -101,12 +105,6 @@ namespace InfiniteRPG
             if (keyState.IsKeyDown(Keys.NumPad2) || keyState.IsKeyDown(Keys.Down))
                 movementState.SetMoving(CameraMovement.Down);
 
-            // Zoom
-            if (keyState.IsKeyDown(Keys.Add) || keyState.IsKeyDown(Keys.LeftControl))
-                movementState.SetMoving(CameraMovement.ZoomIn);
-            if (keyState.IsKeyDown(Keys.Subtract) || keyState.IsKeyDown(Keys.LeftShift))
-                movementState.SetMoving(CameraMovement.ZoomOut);
-
             base.Update(gameTime);
         }
 
@@ -120,7 +118,7 @@ namespace InfiniteRPG
 
             var cameraTransform = camera.GetTransformMatrix();
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransform);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, DepthStencilState.Default, null, null, cameraTransform);
 
             foreach (var section in mapSections)
             {
@@ -129,12 +127,12 @@ namespace InfiniteRPG
 
             spriteBatch.End();
 
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            spriteBatch.DrawString(diagFont, string.Format("x: {0}\ny: {1}\nz: {2}", camera.X, camera.Y, camera.Zoom),
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, DepthStencilState.None, null, null, Matrix.Identity);
+            spriteBatch.DrawString(diagFont, string.Format("x: {0}\ny: {1}", camera.X, camera.Y),
                 Vector2.Zero, Color.DarkGreen);
             spriteBatch.End();
 
-            
+
             base.Draw(gameTime);
         }
     }

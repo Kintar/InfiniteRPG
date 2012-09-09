@@ -34,7 +34,7 @@ namespace InfiniteRPG.Data.Map
             TileCount = tilesWide * tilesHigh;
         }
 
-        public void DrawTile(Vector2 position, int tileNumber, SpriteBatch batch, Color? color = null)
+        public void DrawTile(Vector2 position, int tileNumber, SpriteBatch batch, float depth, Color? color = null)
         {
             Contract.Requires(batch != null);
             Contract.Requires(position != null);
@@ -46,7 +46,7 @@ namespace InfiniteRPG.Data.Map
             var ypos = (tileNumber / tilesWide) * TileHeight;
             var xpos = ((tileNumber - 1) % tilesWide) * TileWidth;
 
-            batch.Draw(Texture, position, new Rectangle(xpos, ypos, TileWidth, TileHeight), myColor);
+            batch.Draw(Texture, position, new Rectangle(xpos, ypos, TileWidth, TileHeight), myColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth);
         }
     }
 }

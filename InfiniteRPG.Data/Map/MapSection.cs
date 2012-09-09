@@ -19,21 +19,20 @@ namespace InfiniteRPG.Data.Map
     {
         public int Width { get; protected set; }
         public int Height { get; protected set; }
-        public Vector2 WorldLocation { get; protected set; }
+        public Vector2 WorldLocation { get; set; }
         public Tileset Tileset { get; set; }
 
-        private int[][] tileLayers;
+        private MapCell[] cells;
 
-        public MapSection(int[][] tileLayers, int width, int height, Vector2 worldLocation, Tileset tileset)
+        public MapSection(MapCell[] cells, int width, int height, Vector2 worldLocation, Tileset tileset)
         {
-            Contract.Requires(tileLayers != null);
-            Contract.Requires(tileLayers.Length > 0);
-            Contract.Requires(tileLayers[0].Length > 0);
+            Contract.Requires(cells != null);
+            Contract.Requires(cells.Length > 0);
             Contract.Requires(width + height > 2); // Both must be > 0
             Contract.Requires(worldLocation != null);
             Contract.Requires(tileset != null);
 
-            this.tileLayers = tileLayers;
+            this.cells = cells;
             Width = width;
             Height = height;
             WorldLocation = worldLocation;
@@ -42,48 +41,18 @@ namespace InfiniteRPG.Data.Map
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var layer in tileLayers)
+            Contract.Requires(spriteBatch != null);
+
+            var x = 0;
+            var y = 0;
+            foreach (var cell in cells)
             {
-                var x = 0;
-                var y = 0;
-                foreach (var tile in layer)
-                {
-                    var tilePos = Vector2.Add(WorldLocation, new Vector2(x * Tileset.TileWidth, y * Tileset.TileHeight));
-                    x++;
-                    if (x % Width == 0)
-                    {
-                        x = 0;
-                        y++;
-                    }
-                    Tileset.DrawTile(tilePos, tile, spriteBatch);
-                }
-            }
-        }
-
-        public static MapSection FromTMXFile(string fileName, Vector2 location, Tileset tileset)
-        {
-            using (var stream = File.OpenRead(fileName))
-            {
-                var doc = XDocument.Load(stream);
-
-                var mapNode = doc.Root;
-                var layers = new List<int[]>();
-
-                var width = int.Parse(mapNode.Attributes().First(x => x.Name == "width").Value);
-                var height = int.Parse(mapNode.Attributes().First(x => x.Name == "height").Value);
-                foreach (var layer in mapNode.DescendantNodes().OfType<XElement>().Where(x => x.Name == "layer"))
-                {
-                    var data = layer.DescendantNodes().OfType<XElement>().First(x => x.Name == "data");
-                    var layerData = data
-                        .DescendantNodes()
-                        .OfType<XElement>()
-                        .Where(x => x.Name == "tile")
-                        .Select(tile => int.Parse(tile.Attributes().First(x => x.Name == "gid").Value))
-                        .ToArray();
-                    layers.Add(layerData);
-                }
-
-                return new MapSection(layers.ToArray(), width, height, location, tileset);
+                var tilePos = Vector2.Add(WorldLocation, new Vector2(x * Tileset.TileWidth, y * Tileset.TileHeight));
+                cell.Draw(tilePos, spriteBatch, Tileset);
+                x++;
+                if (x % Width != 0) continue;
+                x = 0;
+                y++;
             }
         }
     }
