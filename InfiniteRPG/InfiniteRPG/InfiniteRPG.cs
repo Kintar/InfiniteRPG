@@ -26,7 +26,7 @@ namespace InfiniteRPG
         Texture2D myTexture;
         SpriteFont diagFont;
         private Tileset tileset;
-        private MapSection mapSection;
+        private MapSection[] mapSections;
 
         public InfiniteRPG()
         {
@@ -68,7 +68,9 @@ namespace InfiniteRPG
             diagFont = Content.Load<SpriteFont>("Fonts/DiagFont");
 
             tileset = new Tileset("Sample1", myTexture, 32, 32);
-            mapSection = MapSection.FromTMXFile("sample.tmx", new Vector2(0, 0), tileset);
+            mapSections = new MapSection[2];
+            mapSections[0] = MapSection.FromTMXFile("sample.tmx", new Vector2(0, 0), tileset);
+            mapSections[1] = MapSection.FromTMXFile("sample.tmx", new Vector2(0, 25 * 32), tileset);
         }
 
         /// <summary>
@@ -90,19 +92,19 @@ namespace InfiniteRPG
             movementState.Reset();
 
             // Directional movement
-            if (keyState.IsKeyDown(Keys.NumPad4))
+            if (keyState.IsKeyDown(Keys.NumPad4) || keyState.IsKeyDown(Keys.Left))
                 movementState.SetMoving(CameraMovement.Left);
-            if (keyState.IsKeyDown(Keys.NumPad6))
+            if (keyState.IsKeyDown(Keys.NumPad6) || keyState.IsKeyDown(Keys.Right))
                 movementState.SetMoving(CameraMovement.Right);
-            if (keyState.IsKeyDown(Keys.NumPad8))
+            if (keyState.IsKeyDown(Keys.NumPad8) || keyState.IsKeyDown(Keys.Up))
                 movementState.SetMoving(CameraMovement.Up);
-            if (keyState.IsKeyDown(Keys.NumPad2))
+            if (keyState.IsKeyDown(Keys.NumPad2) || keyState.IsKeyDown(Keys.Down))
                 movementState.SetMoving(CameraMovement.Down);
 
             // Zoom
-            if (keyState.IsKeyDown(Keys.Add))
+            if (keyState.IsKeyDown(Keys.Add) || keyState.IsKeyDown(Keys.LeftControl))
                 movementState.SetMoving(CameraMovement.ZoomIn);
-            if (keyState.IsKeyDown(Keys.Subtract))
+            if (keyState.IsKeyDown(Keys.Subtract) || keyState.IsKeyDown(Keys.LeftShift))
                 movementState.SetMoving(CameraMovement.ZoomOut);
 
             base.Update(gameTime);
@@ -120,7 +122,10 @@ namespace InfiniteRPG
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransform);
 
-            mapSection.Draw(spriteBatch);
+            foreach (var section in mapSections)
+            {
+                section.Draw(spriteBatch);
+            }
 
             spriteBatch.End();
 
