@@ -3,7 +3,7 @@ using System;
 namespace InfiniteRPG.Data
 {
     [Flags]
-    enum CameraMovement
+    public enum CameraMovement
     {
         Left = 1,
         Right = 2,

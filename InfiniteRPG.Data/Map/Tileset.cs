@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics.Contracts;
 using InfiniteRPG.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace InfiniteRPG.Data
+namespace InfiniteRPG.Data.Map
 {
     public class Tileset
     {

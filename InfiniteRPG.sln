@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteRPG", "InfiniteRPG\InfiniteRPG\InfiniteRPG.csproj", "{06EB37CA-E85C-43EA-A0D6-2585F8326228}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "InfiniteRPGContent", "InfiniteRPG\InfiniteRPGContent\InfiniteRPGContent.contentproj", "{98742DEC-0086-4CF4-931A-605790B2465B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteRPGContent", "InfiniteRPG\InfiniteRPGContent\InfiniteRPGContent.contentproj", "{98742DEC-0086-4CF4-931A-605790B2465B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1EF1EC1D-A7F1-4F2D-91DA-5AA33E2F5656}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1EF1EC
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteRPG.Data", "InfiniteRPG.Data\InfiniteRPG.Data.csproj", "{16999749-8895-4FEC-AB40-4FCC3371F28F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteRPG.Util", "InfiniteRPG.Util\InfiniteRPG.Util.csproj", "{7E9F7264-E569-4B05-B274-B972D33B1C7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +28,14 @@ Global
 		{06EB37CA-E85C-43EA-A0D6-2585F8326228}.Release|x86.Build.0 = Release|x86
 		{98742DEC-0086-4CF4-931A-605790B2465B}.Debug|x86.ActiveCfg = Debug|x86
 		{98742DEC-0086-4CF4-931A-605790B2465B}.Release|x86.ActiveCfg = Release|x86
+		{16999749-8895-4FEC-AB40-4FCC3371F28F}.Debug|x86.ActiveCfg = Debug|x86
+		{16999749-8895-4FEC-AB40-4FCC3371F28F}.Debug|x86.Build.0 = Debug|x86
+		{16999749-8895-4FEC-AB40-4FCC3371F28F}.Release|x86.ActiveCfg = Release|x86
+		{16999749-8895-4FEC-AB40-4FCC3371F28F}.Release|x86.Build.0 = Release|x86
+		{7E9F7264-E569-4B05-B274-B972D33B1C7D}.Debug|x86.ActiveCfg = Debug|x86
+		{7E9F7264-E569-4B05-B274-B972D33B1C7D}.Debug|x86.Build.0 = Debug|x86
+		{7E9F7264-E569-4B05-B274-B972D33B1C7D}.Release|x86.ActiveCfg = Release|x86
+		{7E9F7264-E569-4B05-B274-B972D33B1C7D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

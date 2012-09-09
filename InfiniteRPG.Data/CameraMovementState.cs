@@ -4,7 +4,7 @@ using System.Text;
 
 namespace InfiniteRPG.Data
 {
-    class CameraMovementState
+    public class CameraMovementState
     {
         CameraMovement current = 0;
 

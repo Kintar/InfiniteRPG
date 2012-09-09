@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Sample" tilewidth="32" tileheight="32">
+  <image source="../../../../Sample1.png" width="1024" height="2016"/>
+ </tileset>
+ <layer name="Floor" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PUQoAAAREQffPoZ1BKdRM+X4rAuCubJ6+/mZ/ese3//UB4LYCJtGRowAQAAA=
+  </data>
+ </layer>
+ <layer name="Walls" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2UMQ4AIAjE+IJP9RPu/thFRwfw1ETbpCOUCTMAmJGCKvvZ6Wv94lTdPzFDX7crC+9Y2XGrr/xD0X7t/tpX4f29w1f6AACwhwbqkN+tABAAAA==
+  </data>
+ </layer>
+ <layer name="Decals" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DMQ0AAAgDsAX/WtGAAR4+jjZpAvBX1y0AALAbcR/0kAAQAAA=
+  </data>
+ </layer>
+ <layer name="Objects" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3KoREAMAzEsEfpuF2po2aBgsAACfqcAOx1z7+/mr8AAEDSnJgfoQAQAAA=
+  </data>
+ </layer>
+ <layer name="Overlay" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OwQkAIAxD0UBBN1FvHcWVHN0JhCKIPfwHuYUQCUBmXt90o+Zhc5V4F7jVTOrBDPv9FgAAILcNMgkeZAAQAAA=
+  </data>
+ </layer>
+ <layer name="Stairs" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OMQ0AAAgDsEnG/4WMEdIqaAIAf0w7AABw1AJePRlbABAAAA==
+  </data>
+ </layer>
+ <layer name="Floor2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DIQ4AMAgEsEswe/gePoGdwSHapAkA/J2avekAAOzzAMBFULQAEAAA
+  </data>
+ </layer>
+ <layer name="Walls2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3NoQ0AMAwEsayQUbs/KUlQaaUntnT4qgD4qaeEM6X+K/0HAOB1AQGZIKQAEAAA
+  </data>
+ </layer>
+ <layer name="Decals2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+  </data>
+ </layer>
+ <layer name="Objects2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OMQ0AAAgDsF3IwL9MDHCS8LQKmgDArut7AADAlQEXud/OABAAAA==
+  </data>
+ </layer>
+ <layer name="Overlay2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+  </data>
+ </layer>
+</map>

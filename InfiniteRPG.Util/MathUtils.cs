@@ -5,7 +5,7 @@ using System.Text;
 
 namespace InfiniteRPG.Util
 {
-    class MathUtils
+    public static class MathUtils
     {
         public static bool IsPowerOfTwo(int val)
         {
