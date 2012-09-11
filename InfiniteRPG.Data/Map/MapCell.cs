@@ -11,16 +11,15 @@ namespace InfiniteRPG.Data.Map
     public class MapCell
     {
         private readonly int[] tileRefs;
-        public bool IsPassable { get; protected set; }
+
         public bool IsLayerTransition { get; protected set; }
 
-        public MapCell(int[] tileRefs, bool isPassable, bool isLayerTransition)
+        public MapCell(int[] tileRefs, bool isLayerTransition)
         {
             Contract.Requires(tileRefs != null);
             Contract.Requires(tileRefs.Length > 0);
             
             this.tileRefs = tileRefs;
-            IsPassable = isPassable;
             IsLayerTransition = isLayerTransition;
         }
 

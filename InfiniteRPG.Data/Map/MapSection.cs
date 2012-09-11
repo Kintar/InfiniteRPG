@@ -24,7 +24,7 @@ namespace InfiniteRPG.Data.Map
 
         private MapCell[] cells;
 
-        public MapSection(MapCell[] cells, int width, int height, Vector2 worldLocation, Tileset tileset)
+        public MapSection(MapCell[] cells, int width, int height, Vector2 worldLocation = default(Vector2), Tileset tileset = null)
         {
             Contract.Requires(cells != null);
             Contract.Requires(cells.Length > 0);
