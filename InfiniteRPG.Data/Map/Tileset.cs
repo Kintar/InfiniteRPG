@@ -43,7 +43,7 @@ namespace InfiniteRPG.Data.Map
 
             var myColor = color.HasValue ? color.Value : Color.White;
             
-            var ypos = (tileNumber / tilesWide) * TileHeight;
+            var ypos = ((tileNumber - 1) / tilesWide) * TileHeight;
             var xpos = ((tileNumber - 1) % tilesWide) * TileWidth;
 
             batch.Draw(Texture, position, new Rectangle(xpos, ypos, TileWidth, TileHeight), myColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth);
