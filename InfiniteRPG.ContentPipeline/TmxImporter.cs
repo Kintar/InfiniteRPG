@@ -22,8 +22,6 @@ namespace InfiniteRPG.ContentPipeline
     [ContentImporter(".tmx", DisplayName = "TMX Map Importer", DefaultProcessor = "PassThroughProcessor")]
     public class TmxImporter : ContentImporter<MapSection>
     {
-        private static int invocationCount = 0;
-
         class MapDescription
         {
             public int Width { get; set; }
@@ -49,7 +47,6 @@ namespace InfiniteRPG.ContentPipeline
 
         public override MapSection Import(string filename, ContentImporterContext context)
         {
-            invocationCount++;
             XDocument doc;
 
             try
@@ -77,13 +74,10 @@ namespace InfiniteRPG.ContentPipeline
         {
             var cells = new List<IList<int>>();
 
-            var file = File.Open("tmx.debug.txt", invocationCount == 1 ? FileMode.Create : FileMode.Append);
-            var writer = new StreamWriter(file);
-            writer.Write(invocationCount);
             foreach (var layer in layers)
             {
                 var layerName = layer.Attributes().First(x => x.Name == "name").Value;
-                writer.Write(layerName);
+
                 MapLayer layerEnum;
                 if (!Enum.TryParse(layerName, true, out layerEnum))
                 {
@@ -127,16 +121,13 @@ namespace InfiniteRPG.ContentPipeline
                             }
 
                             memOutStream.Position = 0;
-                            writer.Write(" [{0}]:", memOutStream.Length);
                             while (memOutStream.Position < memOutStream.Length)
                             {
                                 var t = memOutStream.ReadByte();
                                 for (var i = 0; i < 3; i++ )
                                     t |= memOutStream.ReadByte() << 8;
                                 tileAccum.Add(t);
-                                writer.Write(t + ",");
                             }
-                            writer.WriteLine();
                         }
 
                         tileData = tileAccum.ToArray();
@@ -162,9 +153,7 @@ namespace InfiniteRPG.ContentPipeline
                 }
 
             }
-            writer.WriteLine("Done");
-            writer.Flush();
-            file.Close();
+
             return cells.Select(x => new MapCell(x.ToArray())).ToList();
         }
     }
