@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -8,19 +9,36 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace InfiniteRPG.Data.Map
 {
-    public class MapCell
+    public class MapCell : IEnumerable<int>
     {
         private readonly int[] tileRefs;
 
-        public bool IsLayerTransition { get; protected set; }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
-        public MapCell(int[] tileRefs, bool isLayerTransition)
+        public IEnumerator<int> GetEnumerator()
+        {
+            foreach (var val in tileRefs) yield return val;
+        }
+
+        public bool IsLayerTransition
+        {
+            get { return tileRefs[(int)MapLayer.Stairs] > 1; }
+        }
+
+        public bool IsBlockedOnLayer(MapLayer layer)
+        {
+            return tileRefs[(int) layer] > 1;
+        }
+
+        public MapCell(int[] tileRefs)
         {
             Contract.Requires(tileRefs != null);
             Contract.Requires(tileRefs.Length > 0);
             
             this.tileRefs = tileRefs;
-            IsLayerTransition = isLayerTransition;
         }
 
         public void Draw(Vector2 position, SpriteBatch batch, Tileset tileset)

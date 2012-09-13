@@ -70,11 +70,7 @@ namespace InfiniteRPG
             tileset = new Tileset("Sample1", myTexture, 32, 32);
             mapSections = new MapSection[2];
             mapSections[0] = Content.Load<MapSection>("Maps/layers-example");
-            mapSections[0].Tileset = tileset;
-            mapSections[0].WorldLocation = Vector2.Zero;
             mapSections[1] = Content.Load<MapSection>("Maps/layers-example");
-            mapSections[1].WorldLocation = new Vector2(0, 25 * 32);
-            mapSections[1].Tileset = tileset;
         }
 
         /// <summary>
@@ -120,9 +116,11 @@ namespace InfiniteRPG
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, DepthStencilState.Default, null, null, cameraTransform);
 
+            var loc = Vector2.Zero;
             foreach (var section in mapSections)
             {
-                section.Draw(spriteBatch);
+                section.Draw(spriteBatch, loc, tileset);
+                loc = Vector2.Add(loc, new Vector2(0, 1));
             }
 
             spriteBatch.End();

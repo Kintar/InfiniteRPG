@@ -55,6 +55,18 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Maps\layers-example.tmx">
+      <Name>layers-example</Name>
+      <Importer>TmxImporter</Importer>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\InfiniteRPG.ContentPipeline\InfiniteRPG.ContentPipeline.csproj">
+      <Project>{0831FA9F-17B6-49EE-A175-DA8E61A4494F}</Project>
+      <Name>InfiniteRPG.ContentPipeline</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
